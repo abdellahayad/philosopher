@@ -57,6 +57,7 @@ void  init_forks(pthread_mutex_t *forks, int philo_no)
 void init_data(t_data   *data, t_program *program)
 {
       program->death_flag = 0;
+      program->philos = data;
       pthread_mutex_init(&program->write_lock, NULL);
       pthread_mutex_init(&program->meal_lock, NULL);
       pthread_mutex_init(&program->dead_lock, NULL);

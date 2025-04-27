@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:37:47 by aayad             #+#    #+#             */
-/*   Updated: 2025/04/23 19:55:11 by aayad            ###   ########.fr       */
+/*   Updated: 2025/04/27 21:28:44 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct s_data
     
 }           t_data;
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+
 typedef struct s_program
 {
     pthread_mutex_t	dead_lock;
@@ -63,5 +69,9 @@ void    init_forks(pthread_mutex_t *forks, int philo_no);
 void    init_philos(t_data *philos, t_program *program,
         pthread_mutex_t *forks, char **argv);
 size_t  current_time(void);
+int     create_thread(t_program *program, pthread_mutex_t *forks);
+void    clean_all(char *str, t_program *program, pthread_mutex_t *forks);
+void   *monitor(void *ret);
+void    message(char *str, char *color, t_data *philo, int id);
 
 #endif
