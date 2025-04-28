@@ -3,7 +3,6 @@
 void    clean_all(char *str, t_program *program, pthread_mutex_t *forks)
 {
     int     i;
-    t_data  *data;
 
     i = 0;
     printf("%s\n", str);
@@ -13,7 +12,7 @@ void    clean_all(char *str, t_program *program, pthread_mutex_t *forks)
 
     if (forks)
     {
-        while (i < data->no_philos)
+        while (i < program->philos[0].no_philos)
         {
             pthread_mutex_destroy(&forks[i]);
             i++;

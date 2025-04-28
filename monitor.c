@@ -12,11 +12,38 @@ int     is_die(t_data   *philo)
     return (0);
 }
 
+int		check_all_eat(t_data	*philo)
+{
+	int		i;
+	int		count;
+	
+	count = 0;
+	i = 0;
+	if (philo[0].meals_required == -1)
+		return (0);
+	while (i < philo[0].no_philos)
+	{
+		pthread_mutex_lock(philo[i].meal_lock);
+		if (philo[i].meals_required >= philo[0].meals_count)	
+			count++;
+		pthread_mutex_unlock(philo[i].meal_lock);
+		i++;
+	}
+	if (count == philo[0].no_philos)
+	{
+		pthread_mutex_lock(philo[0].dead_lock);
+		*philo->is_dead = 1;
+		pthread_mutex_unlock(philo[0].dead_lock);
+		return (1);
+	}
+	return (0);
+}
+
 void    message(char *str, char *color, t_data *philo, int id)
 {
     size_t      time;
 
-    if ()
+    if (is_die(philo))
         return ;
     pthread_mutex_lock(philo->write_lock);
     time = current_time() - philo->start_simul;
@@ -35,7 +62,7 @@ static int     check_philo_is_die(t_data *philo)
         if (current_time() - philo[i].last_meals >= philo[i].time_to_die
             && philo[i].eating == 0)
         {
-            // message();
+            message("died", RED, &philo[i], philo[i].id);
             pthread_mutex_lock(philo[0].dead_lock);
             *philo->is_dead = 1;
             pthread_mutex_unlock(philo[0].dead_lock);
@@ -57,4 +84,5 @@ static int     check_philo_is_die(t_data *philo)
         if (check_philo_is_die(philo) == 1)
            break ;
     }
+	return (ret);
  }

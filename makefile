@@ -4,7 +4,7 @@ CC = cc
 
 FLAG = -Wall -Wextra -Werror
 
-SRC = initialization.c main.c parssing.c utils.c create.c monitor.c
+SRC = initialization.c main.c parssing.c utils.c create.c monitor.c destroy.c
 
 OBJ = $(SRC:.c=.o)
 
