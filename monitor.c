@@ -24,7 +24,7 @@ int		check_all_eat(t_data	*philo)
 	while (i < philo[0].no_philos)
 	{
 		pthread_mutex_lock(philo[i].meal_lock);
-		if (philo[i].meals_required >= philo[0].meals_count)	
+		if (philo[i].meals_count >= philo[0].meals_required)	
 			count++;
 		pthread_mutex_unlock(philo[i].meal_lock);
 		i++;
@@ -43,11 +43,10 @@ void    message(char *str, char *color, t_data *philo, int id)
 {
     size_t      time;
 
-    if (is_die(philo))
-        return ;
     pthread_mutex_lock(philo->write_lock);
     time = current_time() - philo->start_simul;
-    printf("%s%zu %d %s%s\n", color, time, id, str, RESET);
+	if (!is_die(philo))
+    	printf("%s%zu %d %s%s\n", color, time, id, str, RESET);
     pthread_mutex_unlock(philo->write_lock);
 }
 
@@ -81,7 +80,7 @@ static int     check_philo_is_die(t_data *philo)
     philo = (t_data *)ret;
     while (true)
     {
-        if (check_philo_is_die(philo) == 1)
+        if (check_philo_is_die(philo) == 1 || check_all_eat(philo) == 1)
            break ;
     }
 	return (ret);

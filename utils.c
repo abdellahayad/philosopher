@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:38:05 by aayad             #+#    #+#             */
-/*   Updated: 2025/04/23 12:04:10 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/01 11:21:39 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    error_msg(char *str)
 {
-    printf("%s\n", str);
+    printf("%s%s\n", RED, str);
 }
 
 long     ft_atoi(const char *str)
@@ -47,4 +47,13 @@ size_t  current_time(void)
     if (gettimeofday(&time, NULL) == -1)
         error_msg("gettimeofday() error");
     return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+size_t	ft_usleep(size_t ms)
+{
+	size_t	start;
+	
+	start = current_time();
+	while ((current_time() - start) < ms)
+		usleep(400);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:37:47 by aayad             #+#    #+#             */
-/*   Updated: 2025/04/27 21:28:44 by aayad            ###   ########.fr       */
+/*   Updated: 2025/04/29 17:04:48 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ int     create_thread(t_program *program, pthread_mutex_t *forks);
 void    clean_all(char *str, t_program *program, pthread_mutex_t *forks);
 void   *monitor(void *ret);
 void    message(char *str, char *color, t_data *philo, int id);
+int     is_die(t_data   *philo);
+size_t	ft_usleep(size_t ms);
+void	*routine(void	*ret);
 
 #endif

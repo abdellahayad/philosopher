@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 11:40:22 by aayad             #+#    #+#             */
-/*   Updated: 2025/04/22 16:52:23 by aayad            ###   ########.fr       */
+/*   Updated: 2025/04/30 16:11:30 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int    parse_inpt(char **argv)
         return (error_msg("Error : Invalid time to eat"), 1);
     if (ft_atoi(argv[4]) <= 0 || is_numeric_string(argv[4]) == 1)
         return (error_msg("Error : Invalid time to sleep"), 1);
-    if (ft_atoi(argv[5]) < 0 || is_numeric_string(argv[5]) == 1)
+    if (argv[5] && (ft_atoi(argv[5]) < 0 || is_numeric_string(argv[5]) == 1))
         return (error_msg("Error : Invalid meals count"), 1);
     return (0);
 }
