@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:37:57 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/01 10:47:08 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/13 19:58:56 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
         init_data(philos, &program);
         init_forks(forks, ft_atoi(argv[1]));
         create_thread(&program, forks);
-		clean_all("finish", &program, forks);
+		clean_all(NULL, &program, forks);
 		return (0);
     }
     else

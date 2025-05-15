@@ -6,11 +6,16 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 11:40:22 by aayad             #+#    #+#             */
-/*   Updated: 2025/04/30 16:11:30 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/13 15:38:01 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 static int	is_numeric_string(const char *str)
 {
@@ -19,7 +24,7 @@ static int	is_numeric_string(const char *str)
     i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (!ft_isdigit(str[i]))
 			return (1);
 		i++;
 	}

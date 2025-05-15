@@ -15,14 +15,14 @@ int     create_thread(t_program *program, pthread_mutex_t *forks)
 			clean_all("Erroe create", program, forks);
 		i++;
 	}
-	if (pthread_join(id_svr, NULL) != 0)
+	if (pthread_detach(id_svr) != 0)
 			clean_all("Erroe create", program, forks);
 	i = 0;
 	while (i < program->philos[0].no_philos)
 	{
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
 			clean_all("Erroe create", program, forks);
-		i++;
+		i++; 
 	}
     return (0);
 }

@@ -61,11 +61,11 @@ static int     check_philo_is_die(t_data *philo)
         if (current_time() - philo[i].last_meals >= philo[i].time_to_die
             && philo[i].eating == 0)
         {
-            message("died", RED, &philo[i], philo[i].id);
+            message("died", RED, &philo[i], philo[i].id); 
             pthread_mutex_lock(philo[0].dead_lock);
             *philo->is_dead = 1;
             pthread_mutex_unlock(philo[0].dead_lock);
-            return (1);
+            return (pthread_mutex_unlock(philo[i].meal_lock), 1);
         }
         pthread_mutex_unlock(philo[i].meal_lock);
         i++;
