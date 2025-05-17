@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:07:53 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/05 21:12:25 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/16 16:53:11 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	clean_all(char *str, t_program *program, pthread_mutex_t *forks);
 void	*monitor(void *ret);
 void	message(char *str, char *color, t_data *philo, int id);
 int		is_die(t_data *philo);
-size_t	ft_usleep(size_t ms);
+size_t	ft_usleep(size_t ms, t_data *philo);
 void	*routine(void *ret);
 
 #endif

@@ -6,7 +6,7 @@ void	eat(t_data *philo)
 	message("take a fork", YELLOW, philo, philo->id);
 	if (philo->no_philos == 1)
 	{
-		ft_usleep(philo->time_to_die);
+		ft_usleep(philo->time_to_die, philo);
 		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
@@ -18,8 +18,9 @@ void	eat(t_data *philo)
 	philo->last_meals = current_time();
 	philo->meals_count++;
 	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->time_to_eat);
+	ft_usleep(philo->time_to_eat, philo);
 	philo->eating = 0;
+	
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
@@ -27,7 +28,7 @@ void	eat(t_data *philo)
 void	slep(t_data *philo)
 {
 	message("sleeping", BLUE, philo, philo->id);
-	ft_usleep(philo->time_to_sleep);
+	ft_usleep(philo->time_to_sleep, philo);
 }
 void think(t_data *philo)
 {
@@ -40,7 +41,7 @@ void	*routine(void	*ret)
 
 	philo = (t_data *)ret;
 	if (philo->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(1, philo);
 	while (!is_die(philo))
 	{
 		eat(philo);

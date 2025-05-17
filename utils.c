@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:38:05 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/01 11:21:39 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/17 22:38:32 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,21 @@ size_t  current_time(void)
         error_msg("gettimeofday() error");
     return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
-size_t	ft_usleep(size_t ms)
+size_t	ft_usleep(size_t ms, t_data *philo)
 {
 	size_t	start;
-	
+	int		dead;
+
 	start = current_time();
 	while ((current_time() - start) < ms)
+	{
 		usleep(400);
+		pthread_mutex_lock(philo->dead_lock);
+		dead = *philo->is_dead;
+		pthread_mutex_unlock(philo->dead_lock);
+		if (dead == 1)
+			break ;
+	}
 	return (0);
 }
+

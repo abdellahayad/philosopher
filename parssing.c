@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 11:40:22 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/13 15:38:01 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/17 21:50:18 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,31 @@
 
 static int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9');
+	return ((c >= '0' && c <= '9' ));
 }
 
 static int	is_numeric_string(const char *str)
 {
-    int     i;
+	int	i;
 
-    i = 0;
-	while (str[i] != '\0')
-	{
-		if (!ft_isdigit(str[i]))
-			return (1);
+	i = 0;
+	if (!str || !*str)
+		return (1);
+	while (str[i] == ' ')
 		i++;
-	}
+	if (str[i] == '+')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (1);
+	while (ft_isdigit(str[i]))
+		i++;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] != '\0')
+		return (1);
 	return (0);
 }
+
 
 int    parse_inpt(char **argv)
 {
