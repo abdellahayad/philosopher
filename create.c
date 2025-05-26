@@ -1,28 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/22 10:41:10 by aayad             #+#    #+#             */
+/*   Updated: 2025/05/22 10:41:12 by aayad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int     create_thread(t_program *program, pthread_mutex_t *forks)
+int	join_threads(t_program *program,
+			pthread_mutex_t *forks, pthread_t monitor_thread)
 {
-    pthread_t   id_svr;
-	int			i;
+	int	i;
 
-    if (pthread_create(&id_svr, NULL, &monitor, program->philos) != 0)
-        clean_all("Error create", program, forks);
 	i = 0;
-	while (i < program->philos[0].no_philos)
-	{
-		if (pthread_create(&program->philos[i].thread, NULL, &routine,
-			&program->philos[i]) != 0)
-			clean_all("Erroe create", program, forks);
-		i++;
-	}
-	if (pthread_detach(id_svr) != 0)
-			clean_all("Erroe create", program, forks);
-	i = 0;
-	while (i < program->philos[0].no_philos)
+	while (i < program->philos->no_philos)
 	{
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
-			clean_all("Erroe create", program, forks);
-		i++; 
+		{
+			clean_all("Error joining philosopher thread", program, forks);
+			return (1);
+		}
+		i++;
 	}
-    return (0);
+	if (pthread_join(monitor_thread, NULL) != 0)
+	{
+		clean_all("Error joining monitor thread", program, forks);
+		return (1);
+	}
+	return (0);
+}
+
+int	create_threads(t_program *program, pthread_mutex_t *forks)
+{
+	pthread_t	monitor_thread;
+	int			i;
+
+	i = 0;
+	while (i < program->philos->no_philos)
+	{
+		if (pthread_create(&program->philos[i].thread, NULL,
+				&routine, &program->philos[i]) != 0)
+		{
+			clean_all("Error creating philosopher thread", program, forks);
+			return (1);
+		}
+		i++;
+	}
+	if (pthread_create(&monitor_thread, NULL,
+			&monitor, program->philos) != 0)
+	{
+		clean_all("Error creating monitor thread", program, forks);
+		return (1);
+	}
+	return (join_threads(program, forks, monitor_thread));
 }
