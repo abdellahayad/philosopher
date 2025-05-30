@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:05:51 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/26 13:33:27 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/28 11:53:20 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	is_die(t_data *philo)
 	pthread_mutex_lock(philo->dead_lock);
 	is_dead = *philo->is_dead;
 	pthread_mutex_unlock(philo->dead_lock);
-	if (is_dead == 1)
-		return (1);
-	return (0);
+	return (is_dead);
 }
 
 static int	check_all_eat(t_data *philo)
@@ -76,10 +74,10 @@ static int	check_philo_is_die(t_data *philo)
 		if (now - philo[i].times.last_meals >= philo[i].times.time_to_die
 			&& !philo[i].eating)
 		{
-			print_die("died", RED, &philo[i], philo[i].id);
 			pthread_mutex_lock(philo->dead_lock);
 			*philo->is_dead = 1;
 			pthread_mutex_unlock(philo->dead_lock);
+			print_die("died", RED, &philo[i], philo[i].id);
 			pthread_mutex_unlock(philo[i].meal_lock);
 			return (1);
 		}

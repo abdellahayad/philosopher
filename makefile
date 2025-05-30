@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-FLAG = -Wall -Wextra -Werror 
+FLAG = -Wall -Wextra -Werror
 
 SRC = initialization.c philo.c parssing.c utils.c create.c\
 	monitor.c help.c routine.c

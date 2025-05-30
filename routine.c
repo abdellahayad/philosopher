@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:02:52 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/26 11:16:05 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/29 14:35:10 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	start_eating(t_data *philo)
 void	eat(t_data *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
-	message("has take a fork", YELLOW, philo, philo->id);
+	message("has taken a fork", YELLOW, philo, philo->id);
 	if (philo->no_philos == 1)
 	{
 		ft_usleep(philo->times.time_to_die, philo);
@@ -35,7 +35,7 @@ void	eat(t_data *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->left_fork);
-	message("has take a fork", YELLOW, philo, philo->id);
+	message("has taken a fork", YELLOW, philo, philo->id);
 	start_eating(philo);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);

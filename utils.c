@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:38:05 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/26 13:35:10 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/29 14:09:28 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ size_t	current_time(void)
 	size_t			ms;
 
 	if (gettimeofday(&now, NULL) == -1)
+	{
 		error_msg("gettimeofday() error");
+		return (0);
+	}
 	ms = now.tv_sec * (size_t)1000;
 	ms += now.tv_usec / 1000;
 	return (ms);

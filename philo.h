@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:07:53 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/26 13:32:53 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/29 15:59:53 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	error_msg(char *str);
 int		parse_inpt(char **argv);
 long	ft_atoi(char *str);
 int		ft_isdigit(int c);
-void	init_forks(pthread_mutex_t *forks, int philo_no);
+int		init_forks(pthread_mutex_t *forks, int philo_no);
 void	init_philos(t_data *philos, t_program *program,
 			pthread_mutex_t *forks, char **argv);
 size_t	current_time(void);

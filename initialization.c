@@ -6,7 +6,7 @@
 /*   By: aayad <aayad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:51:29 by aayad             #+#    #+#             */
-/*   Updated: 2025/05/25 23:48:23 by aayad            ###   ########.fr       */
+/*   Updated: 2025/05/29 15:25:53 by aayad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,20 @@ void	init_philos(t_data *philo, t_program *program,
 	}
 }
 
-void	init_forks(pthread_mutex_t *forks, int count)
+int	init_forks(pthread_mutex_t *forks, int count)
 {
 	int	i;
 
-	i = -1;
-	while (++i < count)
-		pthread_mutex_init(&forks[i], NULL);
+	i = 0;
+	while (i < count)
+	{
+		if (pthread_mutex_init(&forks[i], NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&forks[i]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
